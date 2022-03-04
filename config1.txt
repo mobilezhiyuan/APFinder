@@ -1,0 +1,16 @@
+sourceCompound       C00062
+targetCompound       C00025
+timeLimit   1000
+Bio 1
+Cycle 1
+ifSpecies 1
+k                    2000
+numberOfTheMinimalAtomGroups       2
+mergingStrategy      default
+aSf         0.1
+aT          0.2
+aS          0.1
+aP          0.8
+resultVisualization   true
+graphVizDirectory     D:\\graphviz\\bin\\dot.exe
+resultDirectory       D:\\results\\
