@@ -5,7 +5,7 @@
 # Requirements and installation
 1. APFinder was written and tested on Java with version "1.8.0_201" and Gurobi Optimizer with version "9.0.3". **Java with version "1.8.0_201"(or higher) and Gurobi Optimizer with version "9.0.3"(or higher)** need to be installed to work with APFinder.
 2. APF designed a suitable MILP model and Gurobi is required to solve the MILP model. 
-3. The data required for APFinder program to find pathways are packaged in APFinder.jar
+3. The data required for APFinder program to find pathways are prepared in the directory of data
 
 # Download data and program
 APFinder program is packaged as a JAR bundle called APFinder.jar. To provide ease of use, user can download **APFinder.jar** to run APFinder with command line(see detail in <a  href="#1">Usage Example</a>). 
@@ -50,7 +50,7 @@ mol.rar: contains the prepared files of the compound dataset.
 | numberOfTheMinimalAtomGroups | Number of the minimal atom groups transferred between adjacent metabolites | 2 |
 | solutionNumber | Number of solutions to keep in solution pool | 2000 | 
 | timeLimit | Limits the total time expended (in seconds) | 1000 |
-| mergingStrategy | Merging rule for branched compound(overlapping,non-overlapping,default rule. The default rule merging strategy means that APFinder will first search the branched pathways by non-overlapping rule, and then APFinder will search the branched pathways by overlapping rule in the case of no branched pathways are returned by non-overlapping rule) | default |
+| searchingStrategy | Searching rule for pathways(pathways with the conserved atom group, pathways with the non-conserved atom group, default rule. The default rule searching strategy means that APFinder will first search the pathways with the non-conserved atom group, and then APFinder will search the pathways with the conserved atom group in the case of pathways with the non-conserved atom group are returned) | default |
 | resultDirectory | The directory of searching results, users can find the running results of the program in this directory. | D:\\results\\ |
 
 
