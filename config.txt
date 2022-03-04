@@ -1,0 +1,7 @@
+sourceCompound       C00183
+targetCompound       C00864
+solutionNumber       2000
+timeLimit   1000
+searchingStrategy default
+numberOfTheMinimalAtomGroups       2
+resultDirectory       D:\\results\\
