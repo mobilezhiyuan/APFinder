@@ -45,7 +45,7 @@ mol.rar: contains the prepared files of the compound dataset.
 <a name="3">User can use configure file to adjust the running patameters of APFinder, and the following table is the specific contents of "config.txt"</a>
 | Option | Description | Default value |
 | -----  | ------| ----|
-| sourceCompound | Source compound in KEGG format | C00183 |
+| sourceCompound | Source compound in KEGG format | Optional |
 | targetCompound | Target compound in KEGG format | Required |
 | numberOfTheMinimalAtomGroups | Number of the minimal atom groups transferred between adjacent metabolites | 2 |
 | solutionNumber | Number of solutions to keep in solution pool | 2000 | 
