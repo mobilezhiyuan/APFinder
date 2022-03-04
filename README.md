@@ -38,6 +38,7 @@ reaction.txt: the detail information of reaction.
 
 reactions-atomgroupcount.txt: the detail information of the atom group transfer.
 
+mol.rar: contains the prepared files of the compound dataset.
 ```
 
 # Running parameters
@@ -46,9 +47,9 @@ reactions-atomgroupcount.txt: the detail information of the atom group transfer.
 | -----  | ------| ----|
 | sourceCompound | Source compound in KEGG format | C00183 |
 | targetCompound | Target compound in KEGG format | Required |
-| numberOfTheMinimalAtomGroups | Number of the minimal atom groups transferred from source to target compound | 2 |
-| c | Number of solutions to keep in solution pool | 2000 | 
-| timeLimit | Limits the total time expended (in seconds). | 1000 |
+| numberOfTheMinimalAtomGroups | Number of the minimal atom groups transferred between adjacent metabolites | 2 |
+| solutionNumber | Number of solutions to keep in solution pool | 2000 | 
+| timeLimit | Limits the total time expended (in seconds) | 1000 |
 | mergingStrategy | Merging rule for branched compound(overlapping,non-overlapping,default rule. The default rule merging strategy means that APFinder will first search the branched pathways by non-overlapping rule, and then APFinder will search the branched pathways by overlapping rule in the case of no branched pathways are returned by non-overlapping rule) | default |
 | resultDirectory | The directory of searching results, users can find the running results of the program in this directory. | D:\\results\\ |
 
