@@ -38,7 +38,8 @@ public class MyMain5 {
 //		double aTransf = 0.2;
 //		double aSim = 0.1;
 //		double aPoints = 0.8;
-		int TimeLimit = 50;/////////////////
+		int TimeLimit = 500;/////////////////
+		int solutionNumber = 2000;
 
 		// 添加条件
 		// 主要有四个条件
@@ -56,27 +57,33 @@ public class MyMain5 {
 		for (String line : lines) {
 			String name = line.split(" +")[0].trim();
 			String value = line.split(" +")[1].trim();
-//			System.out.println(line);
-//			if (name.equals("aSf")) {
-//				aFreeEnergy = Double.parseDouble(value);
-//			} else 
-
 			if (name.equals("sourceCompound")) {
 				start = value;
 				ifStart = true;///////////////////////////////////
 			}
-//			else if (name.equals("numberOfTheMinimalAtomGroups")) {
-//				minAtomGroupTransfer = Integer.parseInt(value);
-//			} 
+			else if (name.equals("targetCompound")) {
+				end = value;
+			} 
+			else if (name.equals("numberOfTheMinimalAtomGroups")) {
+				minAtomGroupTransfer = Integer.parseInt(value);
+			} 
+			else if (name.equals("solutionNumber")) {
+				solutionNumber = Integer.parseInt(value);
+			} 
+			else if (name.equals("timeLimit")) {
+				TimeLimit = Integer.parseInt(value);
+			}
+			else if (name.equals("resultDirectory")) {
+				saveTxtPath = value;
+				savePicPath = value;
+			} 
 //			else if (name.equals("keepAtomgroupTransfer")) {
 //				keepAtomgroupTransfer =  true;
 //			}
 //			else if (name.equals("ifSpecies")) {
 //				ifSpecies = true;
 //			}
-//			else if (name.equals("timeLimit")) {
-//				TimeLimit = Integer.parseInt(value);
-//			}
+			
 //			else if (name.equals("Bio")) {
 //				ifBio = true;
 //			}
@@ -92,12 +99,6 @@ public class MyMain5 {
 //			} else if (name.equals("k")) {
 //				k = Integer.parseInt(value);
 //			} 
-			else if (name.equals("targetCompound")) {
-				end = value;
-			} else if (name.equals("resultDirectory")) {
-				saveTxtPath = value;
-				savePicPath = value;
-			} 
 //				else if (name.equals("mergingStrategy")) {
 //				if (value.equals("overlapping")) {
 //					ifInterset = true;
@@ -108,9 +109,9 @@ public class MyMain5 {
 //				} else
 //					ifStartBySingle = false;
 //			} 
-			else if (name.equals("graphVizDirectory")) {
-				graPhVizPath = value;
-			}
+//			else if (name.equals("graphVizDirectory")) {
+//				graPhVizPath = value;
+//			}
 		}
 
 //		System.out.println("---" + "start:" + start + " end:" + end + " minAtomGroupTransfer:" + minAtomGroupTransfer
@@ -120,7 +121,7 @@ public class MyMain5 {
 		long startTime = System.currentTimeMillis(); // 获取开始时间
 		Process1 Process1 = new Process1();
 		Process1.setParameter(start, end, k, minAtomGroupTransfer, minPathLength, maxPathLength, saveTxtPath,
-				savePicPath, ifDraw, ifStart, graPhVizPath, TimeLimit, ifCycle, ifSpecies, keepAtomgroupTransfer);
+				savePicPath, ifDraw, ifStart, graPhVizPath, TimeLimit, ifCycle, ifSpecies, keepAtomgroupTransfer, solutionNumber);
 		Process1.start();
 		long endTime = System.currentTimeMillis(); // 获取结束时间
 		System.out.println("Runing time：" + (endTime - startTime) + "ms");

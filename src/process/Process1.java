@@ -113,6 +113,7 @@ public class Process1 {
 	boolean keepAtomgroupTransfer = false;///////////////////////////////////
 
 	int timeLimit = 1000;/////////////////////////////////////
+	int solutionNumber = 2000;
 
 	public String YenPath = "/data/c1-c2-01.txt";
 
@@ -186,11 +187,12 @@ public class Process1 {
 	
 	public void setParameter(String start, String end, int k, int minAtomGroupTransfer, int minPathLength,
 			int maxPathLength, String saveTxtPath, String savePicPath, boolean ifDraw, boolean ifStart, String graPhVizPath, 
-			int timeLimit, boolean ifCycle, boolean ifSpecies, boolean keepAtomgroupTransfer) {
+			int timeLimit, boolean ifCycle, boolean ifSpecies, boolean keepAtomgroupTransfer, int solutionNumber) {
 		this.keepAtomgroupTransfer = keepAtomgroupTransfer;
 		this.ifSpecies = ifSpecies;
 		this.ifCycle = ifCycle;
 		this.timeLimit = timeLimit;
+		this.solutionNumber = solutionNumber;
 		this.start = start;
 		this.end = end;
 		this.k = k;
@@ -968,7 +970,7 @@ public class Process1 {
 			
 
 			// Limit how many solutions to collect
-			model.set(GRB.IntParam.PoolSolutions, 5000);
+			model.set(GRB.IntParam.PoolSolutions, this.solutionNumber);
 
 			// Turn off display and heuristics
 //			model.set(GRB.IntParam.OutputFlag, 0);
@@ -988,10 +990,10 @@ public class Process1 {
 			model.set(GRB.IntParam.PoolSearchMode, 2);
 
 			// save problem
-			model.write("MPFinder3.lp");
+//			model.write("MPFinder3.lp");
 
 			// Open log file
-			logfile = new FileWriter("MPFinder.log");
+//			logfile = new FileWriter("MPFinder.log");
 
 			// Create a callback object and associate it with the model
 			if (this.ifCycle) {
@@ -1105,7 +1107,7 @@ public class Process1 {
 				
 			}
 			
-			savePathwayMetaboliteReactionTxt(this.saveTxtPath, this.linkArcsSolutions, this.linkReactiosSolutions, "NO");
+//			savePathwayMetaboliteReactionTxt(this.saveTxtPath, this.linkArcsSolutions, this.linkReactiosSolutions, "NO");
 			
 			for (int j = 0; j < this.linkArcsSolutions.size(); j++) {
 				ArrayList<String> tempMe = this.linkArcsSolutions.get(j);
@@ -1127,7 +1129,7 @@ public class Process1 {
 					}
 				}
 			}
-			saveKeepPathwayTxt(this.saveTxtPath, this.linkArcsSolutions, "track-inR");
+//			saveKeepPathwayTxt(this.saveTxtPath, this.linkArcsSolutions, "track-inR");
 			savePathwayMetaboliteReactionTxt(this.saveTxtPath, this.linkArcsSolutions, this.linkReactiosSolutions, "track-inR-MR");
 	
 			if (this.keepAtomgroupTransfer) {
@@ -1148,7 +1150,7 @@ public class Process1 {
 //						count2++;
 					}
 				}
-				saveKeepPathwayTxt(this.saveTxtPath, this.linkArcsSolutions, "track-inLP");
+//				saveKeepPathwayTxt(this.saveTxtPath, this.linkArcsSolutions, "track-inLP");
 				savePathwayMetaboliteReactionTxt(this.saveTxtPath, this.linkArcsSolutions, this.linkReactiosSolutions, "track-inLP-MR");
 			}
 			
