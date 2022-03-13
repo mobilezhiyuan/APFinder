@@ -1,10 +1,10 @@
 # APFinder
 **APFinder**(**P**athway **F**inder based on **A**tomGroup) is a method to find metabolic pathways between the source compound and the target compound or between multi-source compounds and the target compound. 
-**APFinder** consists of three main steps: **First**, APFinder calculates and obtains the atom group transfer information between compounds and constructs a metabolic network based on the KEGG data. **Second**, APF combines stoichiometry and atom group transfer via mixed integer linear programming (MILP) to find linear pathways from a given starting compound or arbitrary starting compound to the target compound. **Finally**, the Gurobi solver is used to solve the MILP, and according to the transfer characteristics of the atom groups in the metabolic pathway, the metabolic pathway with conserved atom groups is selected, and the metabolic pathway with more biochemical feasibility is selected for the user.
+**APFinder** consists of three main steps: **First**, APFinder calculates and obtains the atom group transfer information between compounds and constructs a metabolic network based on the KEGG data. **Second**, APFinder combines stoichiometry and atom group transfer via Mixed-integer Linear Programming (MILP) to find linear pathways from a given starting compound or arbitrary starting compound to the target compound. **Finally**, the GUROBI solver is used to solve the MILP, and according to the transfer characteristics of the atom groups in the metabolic pathway, the metabolic pathway with the conserved atom groups is selected, and the metabolic pathway with more biochemical feasibility is selected for the user.
 
 # Requirements and installation
 1. APFinder was written and tested on Java with version "1.8.0_201" and Gurobi Optimizer with version "9.0.3". **Java with version "1.8.0_201"(or higher) and Gurobi Optimizer with version "9.0.3"(or higher)** need to be installed to work with APFinder.
-2. APF designed a suitable MILP model and Gurobi is required to solve the MILP model. 
+2. APFinder designed a suitable MILP model and GUROBI is required to solve the MILP model. 
 3. The data required for APFinder program to find pathways are prepared in the directory of data
 
 # Download data and program
