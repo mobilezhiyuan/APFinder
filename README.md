@@ -21,7 +21,7 @@ The data required for running APFinder is also packaged in APFinder.jar(see deta
 **the directory of configure file** is the directory of the configure file.
 
 For example: ```java -jar D:\\APFinder.jar D:\\configure.txt ```
-And the Search results are in "resultDirectory" which is specified by user in "config.txt".
+And the Search results are in "resultDirectory" which is specified by user in "config.txt". Note that APFinder.jar must be in the same directory as the folder lib.
 
 # Data organization
 
