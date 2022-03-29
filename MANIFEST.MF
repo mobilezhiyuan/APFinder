@@ -1,3 +1,0 @@
-Manifest-Version: 1.0
-Class-Path: /public/software/apps/gurobi/gurobi903/linux64/lib/gurobi.jar /public/home/jd_wzy/lib/mysql-connector-java-5.1.46.jar /public/home/jd_wzy/lib/ujmp-complete-0.2.5.jar
-Main-Class: process.MyMain5
