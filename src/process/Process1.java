@@ -111,7 +111,11 @@ public class Process1 {
 	boolean ifSpecies = false;///////////////////////////////////
 	
 	boolean keepAtomgroupTransfer = false;///////////////////////////////////
+	
+	boolean saveConserved = false;
 
+	boolean saveNonConserved = false;
+	
 	int timeLimit = 1000;/////////////////////////////////////
 	int solutionNumber = 2000;
 
@@ -187,8 +191,10 @@ public class Process1 {
 	
 	public void setParameter(String start, String end, int k, int minAtomGroupTransfer, int minPathLength,
 			int maxPathLength, String saveTxtPath, String savePicPath, boolean ifDraw, boolean ifStart, String graPhVizPath, 
-			int timeLimit, boolean ifCycle, boolean ifSpecies, boolean keepAtomgroupTransfer, int solutionNumber) {
+			int timeLimit, boolean ifCycle, boolean ifSpecies, boolean keepAtomgroupTransfer, int solutionNumber, boolean saveConserved, boolean saveNonConserved) {
 		this.keepAtomgroupTransfer = keepAtomgroupTransfer;
+		this.saveConserved = saveConserved;
+		this.saveNonConserved = saveNonConserved;
 		this.ifSpecies = ifSpecies;
 		this.ifCycle = ifCycle;
 		this.timeLimit = timeLimit;
@@ -606,8 +612,8 @@ public class Process1 {
 			}
 		}
 		
-		System.out.println("mSize:" + this.metabolites.size() + " rSize:" + this.reactions.size() + " reactionsCount:" + reactionsCount + " reactionsReverseCount:" + reactionsReverseCount +
-				" arcSize:" + this.arcs.size() + " dijrSize:" + this.Dijr.size() + " atomgroupSize:" + this.atomGroupTransferNum.size());
+//		System.out.println("mSize:" + this.metabolites.size() + " rSize:" + this.reactions.size() + " reactionsCount:" + reactionsCount + " reactionsReverseCount:" + reactionsReverseCount +
+//				" arcSize:" + this.arcs.size() + " dijrSize:" + this.Dijr.size() + " atomgroupSize:" + this.atomGroupTransferNum.size());
 
 	}
 	
@@ -674,9 +680,21 @@ public class Process1 {
 			
 //			model.setObjective(obj_u, GRB.MINIMIZE);
 
-//			System.out.println("metaIDMax" + metaIDMax + "arcs.size()" + arcs.size() + "u[1].length" + u[1].length
-//					+ "u.length" + u.length + "reacIDMax" + reacIDMax);
-
+			
+//			int countStart = 0;
+//			int countBasis = 0;
+//			for (String start: startMetabolitesList) {
+//				if (this.metabolitesNum2Kegg.containsValue(start)) {
+//					countStart++;
+//					if (this.basisMetabolitesList.contains(start)) {
+//						countBasis++;
+//					}
+//				}
+//			}
+//			
+//			System.out.println("metaIDMax:" + metaIDMax + "arcs.size():" + arcs.size() + "u[1].length:" + u[1].length
+//					+ "u.length:" + u.length + " reacIDMax:" + reacIDMax + " countStart:" + countStart + " countBasis:" + countBasis);
+			
 			model.addConstr(obj_u, GRB.GREATER_EQUAL, this.minPathLength, "minPathLength");
 			model.addConstr(obj_u, GRB.LESS_EQUAL, this.maxPathLength, "maxPathLength");
 			
@@ -1130,7 +1148,9 @@ public class Process1 {
 				}
 			}
 //			saveKeepPathwayTxt(this.saveTxtPath, this.linkArcsSolutions, "track-inR");
-			savePathwayMetaboliteReactionTxt(this.saveTxtPath, this.linkArcsSolutions, this.linkReactiosSolutions, "track-inR-MR");
+			if (this.saveNonConserved) {
+				savePathwayMetaboliteReactionTxt(this.saveTxtPath, this.linkArcsSolutions, this.linkReactiosSolutions);
+			}
 	
 			if (this.keepAtomgroupTransfer) {
 				int temp_minAtomGroupTransfer = 2;
@@ -1151,7 +1171,9 @@ public class Process1 {
 					}
 				}
 //				saveKeepPathwayTxt(this.saveTxtPath, this.linkArcsSolutions, "track-inLP");
-				savePathwayMetaboliteReactionTxt(this.saveTxtPath, this.linkArcsSolutions, this.linkReactiosSolutions, "track-inLP-MR");
+				if (this.saveConserved) {
+					savePathwayMetaboliteReactionTxt(this.saveTxtPath, this.linkArcsSolutions, this.linkReactiosSolutions);
+				}
 			}
 			
 			
@@ -1341,4 +1363,37 @@ public class Process1 {
 		}
 	}
 
+	public void savePathwayMetaboliteReactionTxt(String filePath, ArrayList<ArrayList<String>> listMetabolite, ArrayList<ArrayList<String>> listReaction) {
+		File file = new File(filePath);
+		if (this.ifStart) {
+			filePath = String.valueOf(filePath) + String.valueOf(this.start) + "_" + String.valueOf(this.end) + ".txt";
+		} else {
+			filePath = String.valueOf(filePath) + String.valueOf(this.end) + ".txt";
+		}
+
+		try {
+			if (!file.exists() && !file.isDirectory()) {
+				file.mkdir();
+			}
+			FileWriter fwriter = new FileWriter(filePath, true);
+			for (int j = 0; j < listMetabolite.size(); j++) {
+				String s = "";
+				ArrayList<String> tempMe = listMetabolite.get(j);
+				ArrayList<String> tempRe = listReaction.get(j);
+				for (int i = 0; i < tempMe.size(); i++) {
+					if (i != tempMe.size() - 1) {
+						s += tempMe.get(i) + "-->" + tempRe.get(i) + "-->";
+					} else {
+						s += tempMe.get(i) + "-->";
+					}
+				}
+				s = s.substring(0, s.length() - 3) + "\r\n";
+				fwriter.write(s);
+			}
+			fwriter.flush();
+			fwriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
