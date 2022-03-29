@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: lib/gurobi.jar lib/mysql-connector-java-5.1.46.jar lib/ujmp-complete-0.2.5.jar lib/yentop2.jar
+Main-Class: process.MyMain5
