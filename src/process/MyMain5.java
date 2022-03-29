@@ -54,6 +54,8 @@ public class MyMain5 {
 		boolean ifSpecies = true;///////////////////////////////////
 		boolean ifCycle = false;///////////////////////////////////
 
+		boolean saveConserved = true;
+		boolean saveNonConserved = false;
 		for (String line : lines) {
 			String name = line.split(" +")[0].trim();
 			String value = line.split(" +")[1].trim();
@@ -99,16 +101,18 @@ public class MyMain5 {
 //			} else if (name.equals("k")) {
 //				k = Integer.parseInt(value);
 //			} 
-//				else if (name.equals("mergingStrategy")) {
-//				if (value.equals("overlapping")) {
-//					ifInterset = true;
-//					ifStartBySingle = true;
-//				} else if (value.equals("non-overlapping")) {
-//					ifInterset = false;
-//					ifStartBySingle = true;
-//				} else
-//					ifStartBySingle = false;
-//			} 
+			else if (name.equals("searchingStrategy")) {
+				if (value.equals("conserved")) {
+					saveConserved = true;
+					saveNonConserved = false;
+				} else if (value.equals("non-conserved")) {
+					saveNonConserved = true;
+					saveConserved = false;
+				} else {
+					saveConserved = true;
+					saveNonConserved = false;
+				}
+			}
 //			else if (name.equals("graphVizDirectory")) {
 //				graPhVizPath = value;
 //			}
@@ -116,12 +120,12 @@ public class MyMain5 {
 
 //		System.out.println("---" + "start:" + start + " end:" + end + " minAtomGroupTransfer:" + minAtomGroupTransfer
 //				+ " keepAtomgroupTransfer:" + keepAtomgroupTransfer + " ifStart:" + ifStart + " ifSpecies:" + ifSpecies
-//				+ " TimeLimit:" + TimeLimit + "----");
+//				+ " TimeLimit:" + TimeLimit + " searchingStrategy:" + saveConserved + "or" + saveNonConserved +"----");
 
 		long startTime = System.currentTimeMillis(); // 获取开始时间
 		Process1 Process1 = new Process1();
 		Process1.setParameter(start, end, k, minAtomGroupTransfer, minPathLength, maxPathLength, saveTxtPath,
-				savePicPath, ifDraw, ifStart, graPhVizPath, TimeLimit, ifCycle, ifSpecies, keepAtomgroupTransfer, solutionNumber);
+				savePicPath, ifDraw, ifStart, graPhVizPath, TimeLimit, ifCycle, ifSpecies, keepAtomgroupTransfer, solutionNumber, saveConserved, saveNonConserved);
 		Process1.start();
 		long endTime = System.currentTimeMillis(); // 获取结束时间
 		System.out.println("Runing time：" + (endTime - startTime) + "ms");
